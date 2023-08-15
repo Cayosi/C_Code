@@ -71,9 +71,8 @@ int getMineCount(char mine[ROWS][COLS], int x, int y)
 void scouriMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 {
 	int x, y;
-	int count = EASY_COUNT;
-
-	while (count)
+	int win = 0;
+	while (win < row*col-EASY_COUNT)
 	{
 		printf("请输入要排查的坐标-> ");
 		scanf("%d %d", &x, &y);
@@ -87,17 +86,26 @@ void scouriMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 				displayBoard(mine, row, col);
 				break;
 			}
+			else if (show[x][y] != '*')
+			{
+				printf("已经排查过了请重新输入\n");
+			}
 			else
 			{
 				int res = getMineCount(mine, x, y);
 				show[x][y] = res + '0';
 				displayBoard(show, row, col);
-				count--;
+				win++;
 			}
 		}
 		else
 		{
 			printf("非法输入请重新输入\n");
 		}
+	}
+	if (win == row * col - EASY_COUNT)
+	{
+		printf("恭喜你，排雷成功！！\n");
+		displayBoard(mine,row,col);
 	}
 }
