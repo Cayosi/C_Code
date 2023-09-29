@@ -31,19 +31,24 @@
 //		}
 //	}
 //}
-void myBubSort(void* basic, size_t nitems, size_t size, int (*compar)(const void*, const void*)) {
+void myBubSort(void* basic, size_t nitems, size_t size, int (*compar)(const void*, const void*))
+{
 	char* tmp = (char*)basic;
 	int flag = 1;
 	size_t lastSwap = nitems - 1;
 
-	while (flag) {
+	while (flag)
+	{
 		flag = 0;
 		size_t newLastSwap = 0;//在循环内部每次交换时都会记录 j 的值 在下一轮遍历时，只需要遍历到这个位置之前的元素
-		for (size_t j = 0; j < lastSwap; j++) {
+		for (size_t j = 0; j < lastSwap; j++)
+		{
 			char* op1 = tmp + (j * size);
 			char* op2 = tmp + ((j + 1) * size);
-			if (compar(op1, op2) > 0) {
-				for (size_t k = 0; k < size; k++) {
+			if (compar(op1, op2) > 0)
+			{
+				for (size_t k = 0; k < size; k++)
+				{
 					char temp;
 					temp = *(op1 + k);
 					*(op1 + k) = *(op2 + k);
