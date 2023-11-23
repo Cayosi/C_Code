@@ -29,22 +29,25 @@ ListNode* NewNode()
 	return newNode;
 }
 // 双向链表销毁
-void ListDestory(ListNode** pHead)
+void ListDestory(ListNode** ppHead)
 {
-	ListNode* destory = (*pHead)->_next;
+	assert(ppHead);
+	assert(*ppHead);
+	ListNode* destory = (*ppHead)->_next;
 	ListNode* tmp;
-	while (destory != *pHead)
+	while (destory != *ppHead)
 	{
 		tmp = destory->_next;
 		free(destory);
 		destory = tmp;
 	}
-	free(*pHead);
-	*pHead = NULL;
+	free(*ppHead);
+	*ppHead = NULL;
 }
 // 双向链表打印
 void ListPrint(ListNode* pHead)
 {
+	assert(pHead);
 	for (ListNode* i = pHead; i->_next!=pHead; i=i->_next)
 	{
 		printf("%d ", i->_next->_data);
@@ -54,6 +57,7 @@ void ListPrint(ListNode* pHead)
 // 双向链表尾插
 void ListPushBack(ListNode* pHead, LTDataType x)
 {
+	assert(pHead);
 	ListNode* newNode = NewNode();
 	pHead->_prev->_next = newNode;
 	newNode->_prev = pHead->_prev;
@@ -64,6 +68,7 @@ void ListPushBack(ListNode* pHead, LTDataType x)
 // 双向链表尾删
 void ListPopBack(ListNode* pHead)
 {
+	assert(pHead);
 	if (pHead->_next == pHead)
 	{
 		return;
@@ -96,6 +101,7 @@ void ListPushFront(ListNode* pHead, LTDataType x)
 // 双向链表头删
 void ListPopFront(ListNode* pHead)
 {
+	assert(pHead);
 	if (pHead->_next!=pHead)
 	{
 		
@@ -117,6 +123,7 @@ void ListPopFront(ListNode* pHead)
 // 双向链表查找
 ListNode* ListFind(ListNode* pHead, LTDataType x)
 {
+	assert(pHead);
 	for (ListNode* i = pHead; i->_next != pHead; i = i->_next)
 	{
 		if (i->_next->_data == x)
@@ -129,6 +136,7 @@ ListNode* ListFind(ListNode* pHead, LTDataType x)
 // 双向链表在pos的前面进行插入
 void ListInsert(ListNode* pos, LTDataType x)
 {
+	assert(pos);
 	ListNode* tmp = pos->_prev;
 	ListNode* newnode = NewNode();
 	tmp->_next = newnode;
@@ -140,6 +148,7 @@ void ListInsert(ListNode* pos, LTDataType x)
 // 双向链表删除pos位置的节点
 void ListErase(ListNode* pos)
 {
+	assert(pos);
 	ListNode* prev = pos->_prev;
 	ListNode* next = pos->_next;
 	prev->_next = next;
